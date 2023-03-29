@@ -4,6 +4,11 @@
 
 using namespace std;
 
+struct Rectangle {
+    int width;
+    int height;
+};
+
 int main()
 {
     int num1 = 10;
@@ -44,5 +49,23 @@ int main()
     
     free(ptr_arr);      // de-allocate the memory from heap. 'C' way
     delete [] ptr_arr_cpp;      // de-allocate the memory from heap. 'C++' way
+    
+    
+    
+    // Pointer to struct
+    
+    struct Rectangle r = { 200, 100 };
+    struct Rectangle *ptr_struct = &r;
+    
+    cout << "\n\nPrinting the Rectangle struct: \n";
+    printf("The width is %d and height is %d\n", r.width, r.height);
+    
+    cout << "\nPrinting using pointer to Rectangle struct: \n";
+    cout << ptr_struct -> width << endl;        // using arrow operator to access the struct elements
+    
+    // the reason for giving *ptr_struct in bracket is 
+    // for resolving it's value first before accessing height using dot operator.
+    cout << (*ptr_struct).height << endl;       // using pointer and dot operator to access struct elements
+    
     return 0;
 }
