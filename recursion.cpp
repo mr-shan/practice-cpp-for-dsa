@@ -58,14 +58,37 @@ int mFibonacci(int num)
     return fibArray[num - 2] + fibArray[num - 1];
 }
 
+// recursive function for getting combination of numbers.
+// the original formula for getting combination is:
+// nCr = n! / (r! * (n - r)!)
+// the below function make use of PASCAL's triangle to find the combination
+// pascal's triangle reference: https://en.wikipedia.org/wiki/Pascal%27s_triangle
+int nCr(int n, int r) {
+    if (n == r || r == 0) return 1;
+    
+    return nCr(n-1, r-1) + nCr(n-1, r);
+}
+
+// using formula
+// nCr = n! / (r! * (n - r)!)
+int nCr2(int n, int r) {
+    int factN = factorial(n);
+    int factR = factorial(r);
+    int factNminusR = factorial(n - r);
+    
+    return factN / (factR * factNminusR);
+}
+
 
 int main()
 {
     int num = 6, power = 3;
+    int n = 4, r = 2;       // for the nCr combination function
     printf("Factorial of %d is: %d\n", num, factorial(num));
     printf("Sum of all numbers till %d is: %d\n", num, sumOfNumbers(num));
     printf("The power of %d to %d is: %d\n", num, power, exponent(num, power));
     printf("The %d term in fibonacci series is %d\n", num, mFibonacci(num));
+    printf("Combination of %d at %d is: %d\n", n , r, nCr(n, r));
     
     return 0;
 }
