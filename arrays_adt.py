@@ -1,6 +1,3 @@
-#include <iostream>
-
-
 class NumbersArray
 {
 private:
@@ -78,18 +75,17 @@ public:
     
     int binarySearch(int key)
     {
-        int left = 0, right = this -> length;
-        int mid = (left + right) / 2;
+        int left = 0, right = this -> length, mid;
         
         while (left <= right)
         {
+            mid = (left + right) / 2;
             if (this -> array[mid] == key)
                 return mid;
             else if (this -> array[mid] < key)
                 left = mid + 1;
             else
                 right = mid - 1;
-            mid = (left + right) / 2;
         }
         return -1;
     }
