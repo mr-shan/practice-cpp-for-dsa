@@ -59,9 +59,52 @@ public:
     
     int get(int index)
     {
-        if (index < 0 || index >= this -> length)
+        if (index < 0 || index > this -> length)
             return -1;
         return this -> array[index];
+    }
+    
+    int set(int index, int number)
+    {
+        if (index < 0 || index > this -> length)
+            return -1;
+        
+        this -> array[index] = number;
+        return number;
+    }
+    
+    int max()
+    {
+        int maxNum = this -> array[0];
+        for (int i = 1; i < this -> length; ++i)
+            if (this -> array[i] > maxNum)
+                maxNum = this -> array[i];
+            
+        return maxNum;
+    }
+    
+    int min()
+    {
+        int minNum = this -> array[0];
+        for (int i = 1; i < this -> length; ++i)
+            if (this -> array[i] < minNum)
+                minNum = this -> array[i];
+            
+        return minNum;
+    }
+    
+    int sum()
+    {
+        int sum = 0;
+        for (int i = 0; i < this -> length; ++i)
+            sum += this -> array[i];
+        
+        return sum;
+    }
+    
+    int avg()
+    {
+        return this -> sum() / this -> length;
     }
     
     int linearSearch(int number)
