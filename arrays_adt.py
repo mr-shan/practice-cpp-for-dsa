@@ -6,11 +6,22 @@ private:
     int length;
     
 public:
-    NumbersArray(int size, int length)
+    NumbersArray(int size)
     {
         this -> size = size;
         this -> length = 0;
         this -> array = new int[size];
+    }
+    
+    NumbersArray(int arr[], int length, int size)
+    {
+        this -> size = size;
+        this -> length = length;
+        this -> array = new int[size];
+        for (int i = 0; i < length; ++i)
+        {
+            this -> array[i] = arr[i];
+        }
     }
     
     void print() {
@@ -38,6 +49,23 @@ public:
         for (int i = this -> length; i >= index; i--)
             this -> array[i] = this -> array[i - 1];
         this -> array[index] = number;
+        this -> length++;
+        
+        return number;
+    }
+    
+    int insertSorted(int number)
+    {
+        if (this -> length == this -> size || !this -> isSorted())
+            return -1;
+        
+        int i = this -> length - 1;
+        while(i >= 0 && this -> array[i] > number)
+        {
+            this -> array[i + 1] = this -> array[i];
+            i--;
+        }
+        this -> array[i + 1] = number;
         this -> length++;
         
         return number;
@@ -132,6 +160,31 @@ public:
         }
         return -1;
     }
+    
+    void reverse()
+    {
+        int start, end;
+        for (start = 0, end = this -> length - 1; start < end; ++start, --end)
+        {
+            int temp = this -> array[start];
+            this -> array[start] = this -> array[end];
+            this -> array[end] = temp;
+        }
+    }
+    
+    bool isSorted()
+    {
+        for(int i = 0; i < this -> length - 1; ++i)
+            if (this -> array[i] > this -> array[i + 1])
+                return false;
+        
+        return true;
+    }
+    
+//    TODOs:
+//    void rearrange() // rearrange +ve and -ve
+//    void shifting left and right
+//    rotate left and right
     
     ~NumbersArray()
     {
