@@ -75,3 +75,35 @@ void findMissingElementsFromUnsortedArray(int *arr, int length)
         if (arrH[i] == 0)
             cout << i << " ";
 }
+
+// find duplicate elements in sorted array
+void findDuplicates(int *arr, int length)
+{
+    int lastDuplicate = 0;
+    for (int i = 0; i < length - 1; ++i)
+    {
+        if (arr[i] == arr[i + 1] && arr[i] != lastDuplicate) {
+            cout << arr[i] << " ";
+            lastDuplicate = arr[i];
+        }
+    }
+}
+
+// find duplicates using hash
+void findDuplicatesUsingHash(int *arr, int length)
+{
+    int high = arr[0];
+    for (int i = 0; i < length; ++i)
+        high = arr[i] > high ? arr[i] : high;
+    
+    int arrH[high + 1] = { 0 };
+    
+    for (int i = 0; i < length - 1; ++i)
+    {
+        arrH[arr[i]]++;
+    }
+    
+    for (int i = 1; i < high; ++i)
+        if (arrH[i] > 1)
+            printf("%d is duplicate at %d times\n", i, arrH[i]);
+}
