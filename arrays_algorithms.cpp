@@ -98,10 +98,8 @@ void findDuplicatesUsingHash(int *arr, int length)
     
     int arrH[high + 1] = { 0 };
     
-    for (int i = 0; i < length - 1; ++i)
-    {
+    for (int i = 0; i < length; ++i)
         arrH[arr[i]]++;
-    }
     
     for (int i = 1; i < high; ++i)
         if (arrH[i] > 1)
