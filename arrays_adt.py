@@ -181,6 +181,23 @@ public:
         return true;
     }
     
+    void merge(NumbersArray *a1, NumbersArray *a2)
+    {
+        int i, j, k;
+        i=j=k=0;
+        
+        while (i < a1 -> length && j < a2 -> length)
+            this -> array[k++] = a1 -> array[i] < a2 -> array[j] ? a1 -> array[i++] : a2 -> array[j++];
+        
+        for (;i < a1 -> length; i++)
+            this -> array[k++] = a1 -> array[i];
+        
+        for (;j < a2 -> length; j++)
+            this -> array[k++] = a2 -> array[j];
+        
+        this -> length = k;
+    }
+    
 //    TODOs:
 //    void rearrange() // rearrange +ve and -ve
 //    void shifting left and right
