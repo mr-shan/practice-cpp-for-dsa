@@ -54,3 +54,24 @@ void findMultipleMissingElements(int *arr, int length)
         }
     }
 }
+
+// find missing elements for unsorted array using hash array
+void findMissingElementsFromUnsortedArray(int *arr, int length)
+{
+    int high = arr[0], low = arr[0];
+    for (int i = 0; i < length; ++i)
+    {
+        high = arr[i] > high ? arr[i] : high;
+        low = arr[i] < low ? arr[i] : low;
+    }
+    
+    int arrH[high + 1] = { 0 };
+    for (int i = 0; i < length; ++i)
+        ++arrH[arr[i]];
+    
+    cout << endl;
+        
+    for (int i = 1; i <= high; ++i)
+        if (arrH[i] == 0)
+            cout << i << " ";
+}
