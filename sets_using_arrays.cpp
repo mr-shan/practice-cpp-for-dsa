@@ -36,7 +36,7 @@ int* setUnion(int* arr1, int length1, int* arr2, int length2)
 
 int* setIntersection(int* arr1, int length1, int* arr2, int length2)
 {
-    int *combinedArray = new int[3];
+    int *combinedArray = new int[4];
     
     int i = 0, j = 0, k = 0;
     
@@ -49,6 +49,28 @@ int* setIntersection(int* arr1, int length1, int* arr2, int length2)
         else
         {
             combinedArray[k++] = arr1[i];
+            i++;
+            j++;
+        }
+    }
+    
+    return combinedArray;
+}
+
+int* setDifference(int* arr1, int length1, int* arr2, int length2)
+{
+    int *combinedArray = new int[10];
+    
+    int i = 0, j = 0, k = 0;
+    
+    while (i < length1 && j < length2)
+    {
+        if (arr1[i] < arr2[j]) 
+            combinedArray[k++] = arr1[i++];
+        else if (arr2[j] < arr1[i]) 
+            j++;
+        else
+        {
             i++;
             j++;
         }
@@ -70,6 +92,7 @@ int main()
     
     int *uni = setUnion(arr1, 5, arr2, 8);
     int *intersect = setIntersection(arr1, 5, arr2, 8);
+    int *diff = setDifference(arr2, 8, arr1, 5);
     
     cout << "Set 1: { ";
     printSet(arr1, 5); 
@@ -78,13 +101,15 @@ int main()
     cout << "}\n\n";
     
     cout << "Union of two sets: { ";
-    for (int i = 0; i < 9; ++i)
-        printf("%d ", uni[i]);
+    printSet(uni, 9);
     cout << "}\n";
     
     cout << "Intersection of two sets: { ";
-    for (int i = 0; i < 5; ++i)
-        printf("%d ", intersect[i]);
+    printSet(intersect, 4);
+    cout << "}\n";
+    
+    cout << "Difference between two sets (Set2 - Set1): { ";
+    printSet(diff, 10);
     cout << "}\n"; 
 
     return 0;
