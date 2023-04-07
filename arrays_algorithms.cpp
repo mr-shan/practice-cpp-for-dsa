@@ -1,3 +1,7 @@
+#include <iostream>
+
+using namespace std;
+
 // function to find missing element from the natural elements
 // use the sum to find the missing element here.
 // the formula for that is sum = n(n + 1) / 2
@@ -127,4 +131,30 @@ void fundDuplicatesInUnsortedArray(int *arr, int length)
         if (duplicates > 1)
             printf("%d is duplicate at %d times\n", arr[i], duplicates);
     }
+}
+
+int main()
+{
+    int arr[] = { 5, 6, 8, 9, 10, 11 };
+    int arr2[] = { 1, 4, 5, 6, 9, 14, 15, 16 };
+    int arr3[] = { 5, 2, 6, 7, 1, 9 };
+    int arr4[] = { 1, 2, 5, 7, 8, 8, 9, 10, 15, 15, 15, 17 };
+    int arr5[] = { 11, 12, 16, 9, 6, 1, 11, 11, 6 };
+    int missingElement = findMissingElement(arr, 6);
+    findMultipleMissingElements(arr2, 8);
+    cout << endl;
+    
+    cout << "Missing element is : " << missingElement << "\n\n";
+    
+    cout << endl;
+    // findMissingElementsFromUnsortedArray(arr3, 6);
+    findDuplicates(arr4, 12);
+    cout << endl;
+    cout << endl;
+    cout << "Duplicates using hash\n";
+    findDuplicatesUsingHash(arr5, 9);
+
+    cout << "\n\nDuplicates using iterations\n";
+    fundDuplicatesInUnsortedArray(arr5, 9);
+    return 0;
 }
