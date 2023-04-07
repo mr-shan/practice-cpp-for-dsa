@@ -105,3 +105,26 @@ void findDuplicatesUsingHash(int *arr, int length)
         if (arrH[i] > 1)
             printf("%d is duplicate at %d times\n", i, arrH[i]);
 }
+
+// find duplicates using iterations
+void fundDuplicatesInUnsortedArray(int *arr, int length)
+{
+    for (int i = 0; i < length - 1; ++i)
+    {
+        int duplicates = 1;
+        
+        if (arr[i] == -1) continue;
+        
+        for (int j = i + 1; j < length; ++j)
+        {
+            if (arr[i] == arr[j]) 
+            {
+                duplicates++;
+                arr[j] = -1;
+            }
+        }
+        
+        if (duplicates > 1)
+            printf("%d is duplicate at %d times\n", arr[i], duplicates);
+    }
+}
