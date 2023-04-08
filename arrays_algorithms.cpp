@@ -181,7 +181,15 @@ void findPairOfElementsWithSum2(int *arr, int length, int sum)
 // Use of sorted array to find a pair of elements with required sum
 void findPairOfElementsWithSumSortedArray(int *arr, int length, int sum)
 {
-  
+  int low = 0, high = length - 1;
+  while (low < high)
+  {
+    int currentSum = arr[low] + arr[high];
+    if (currentSum > sum) high--;
+    else if (currentSum < sum) low++;
+    else 
+      printf("Sum of (%d+%d) = %d\n", arr[low++], arr[high--], sum);
+  }
 }
 
 int main()
