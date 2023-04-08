@@ -133,6 +133,57 @@ void fundDuplicatesInUnsortedArray(int *arr, int length)
     }
 }
 
+// Utility functions
+int getMaxNum(int *arr, int length)
+{
+  int max = 0;
+  for (int i = 0; i < length; ++i)
+    max = arr[i] > max ? arr[i] : max;
+  return max;
+}
+
+void printArray(int *arr, int length)
+{
+  cout << "array = [ ";
+  for (int i = 0; i < length; ++i)
+    cout << arr[i] << " ";
+  cout << "]\n";
+}
+
+
+// Iterative method of finding pair of elements with required sum
+void findPairOfElementsWithSum(int *arr, int length, int sum)
+{
+  for (int i = 0; i < length - 1; ++i)
+  {
+    for (int j = i + 1; j < length; ++j)
+    {
+      if (arr[i] + arr[j] == sum)
+        printf("Sum of (%d+%d) = %d\n", arr[i], arr[j], sum);
+    }
+  }
+}
+
+// Use of hashing to find a pair of elements with required sum
+void findPairOfElementsWithSum2(int *arr, int length, int sum)
+{
+  int maxNum = getMaxNum(arr, length);
+  int arrH[maxNum + 1] = { 0 };
+  
+  for (int i = 0; i < length; ++i)
+  {
+    arrH[arr[i]] = 1;
+    if (arrH[sum - arr[i]] == 1 && arr[i] != sum - arr[i])
+      printf("Sum of (%d+%d) = %d\n", arr[i], sum - arr[i], sum);
+  }
+}
+
+// Use of sorted array to find a pair of elements with required sum
+void findPairOfElementsWithSumSortedArray(int *arr, int length, int sum)
+{
+  
+}
+
 int main()
 {
     int arr[] = { 5, 6, 8, 9, 10, 11 };
