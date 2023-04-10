@@ -75,6 +75,34 @@ int isAnagram(char *str1, char *str2)
   return 1;
 }
 
+// Function to get permutations of characters present in a string
+// Uses backtracking and brute force to get all possible permutations.
+void getPermutations(char str[], int k = 0)
+{
+    static char result[10];
+    static int temp[10] = { 0 };
+    int i;
+    
+    if (str[k] == '\0')
+    {
+        result[k] = '\0';
+        printf("%s\n", result);
+    }
+    else
+    {
+        for(i = 0; str[i] != '\0'; i++)
+        {
+            if (temp[i] == 0)
+            {
+                result[k] = str[i];
+                temp[i] = 1;
+                getPermutations(str, k + 1);
+                temp[i] = 0;
+            }
+        }
+    }
+}
+
 int main() 
 {
     char name[] = "Madam";
