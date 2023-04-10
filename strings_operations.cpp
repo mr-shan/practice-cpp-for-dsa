@@ -56,6 +56,25 @@ int checkDuplicate(char *str)
   }
 }
 
+int isAnagram(char *str1, char *str2)
+{
+  // str2 and str1 are of same length.
+  // the characters are lower case characters only.
+  char hash[26] = { 0 };
+  int i = -1;
+  
+  while(str1[++i] != '\0')
+  {
+    hash[str1[i] - 100] += 1;
+    hash[str2[i] - 100] -= 1;
+  }
+  
+  for(int j = 0; j < 26; ++j)
+    if (hash[j] != 0) return 0;
+  
+  return 1;
+}
+
 int main() 
 {
     char name[] = "Madam";
