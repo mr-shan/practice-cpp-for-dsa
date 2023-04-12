@@ -103,6 +103,29 @@ void getPermutations(char str[], int k = 0)
     }
 }
 
+void swap(char *t1, char *t2)
+{
+  char temp = *t1;
+  *t1 = *t2;
+  *t2 = temp;
+}
+
+// permutations by using swapping the characters in string.
+void permutations(char *str, int low, int high)
+{
+  if (low == high)
+  {
+    printf("%s\n", str);
+    return;
+  }
+  for(int i = low; i < high; ++i)
+  {
+    swap(&str[i], &str[low]);
+    permutations(str, low + 1, high);
+    swap(&str[i], &str[low]);
+  }
+}
+
 int main() 
 {
     char name[] = "Madam";
