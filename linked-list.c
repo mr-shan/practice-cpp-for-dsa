@@ -94,6 +94,44 @@ struct Node * search(struct Node *list, int key)
     return NULL;
 }
 
+// insert element at given index in linked list
+void insert(struct Node *list, int index, int data)
+{
+    struct Node *p = list;
+    struct Node *q = NULL;
+    int counter = 0;
+    
+    while (counter < index)
+    {
+        if (p == NULL)
+            break;
+        else
+        {
+           q = p;
+           p = p->next;
+        }
+        counter++;
+    }
+    
+    if (p == NULL && counter != index)
+    {
+        printf("Index of out bound\n");
+        return;   
+    }
+    
+    struct Node *newNode = createNode(data);
+    if (q == NULL)
+    {
+        newNode->next = list;
+        list = newNode;
+    } else 
+    {
+        q->next = newNode;
+        newNode->next = p;
+    }
+    printList(list);
+}
+
 // recursive version of normal functions
 void rPrintList(struct Node *list)
 {
