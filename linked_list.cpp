@@ -84,6 +84,36 @@ class LinkedList
         return temp;
     }
     
+    int pop2()
+    {
+        if (this->count == 0)
+            return -1;
+
+        int temp;
+        if (this->count == 1)
+        {
+            temp = this->head->data;
+            free(this->head);
+            this->head = NULL;
+            this->tail = NULL;
+        }
+        else
+        {
+            Node *newTail = this->head;
+            int ctr = 0;
+            
+            while(++ctr < this->count - 1)
+                newTail = newTail->next;
+            
+            temp = this->tail->data;
+            free(this->tail);
+            newTail->next = NULL;
+            this->tail = newTail;
+        }
+        this->count--;
+        return temp;
+    }
+    
     void print()
     {
         Node *ctr = this->head;
