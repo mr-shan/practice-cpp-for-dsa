@@ -114,6 +114,40 @@ class LinkedList
         return temp;
     }
     
+    int insert(int data, int position)
+    {
+        if (position < 1 || position > this->count) return -1;
+        
+        if (position == this->count)
+        {
+            this->push(data);
+            return data;
+        }
+        
+        Node *ptr = this->head;
+        Node *prevPtr = NULL;
+        
+        for(int i = 0; i < position - 1; ++i)
+        {
+            prevPtr = ptr;
+            ptr = ptr->next;
+        }
+        
+        Node *newNode = new Node;
+        newNode->data = data;
+        
+        if(prevPtr == NULL)
+            this->head = newNode;
+        else
+            prevPtr->next = newNode;
+        
+        newNode->next = ptr;
+        
+        this->count++;
+        
+        return data;
+    }
+    
     void print()
     {
         Node *ctr = this->head;
