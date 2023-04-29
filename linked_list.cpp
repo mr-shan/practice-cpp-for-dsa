@@ -116,18 +116,12 @@ class LinkedList
     
     int insert(int data, int position)
     {
-        if (position < 1 || position > this->count) return -1;
-        
-        if (position == this->count)
-        {
-            this->push(data);
-            return data;
-        }
-        
+        if (position < 1 || position > this->count + 1) return -1;
+
         Node *ptr = this->head;
         Node *prevPtr = NULL;
         
-        for(int i = 0; i < position - 1; ++i)
+        for(int i = 1; i < position; ++i)
         {
             prevPtr = ptr;
             ptr = ptr->next;
@@ -135,17 +129,34 @@ class LinkedList
         
         Node *newNode = new Node;
         newNode->data = data;
+        newNode->next = ptr;
         
         if(prevPtr == NULL)
             this->head = newNode;
         else
             prevPtr->next = newNode;
-        
-        newNode->next = ptr;
+            
+        if (ptr == NULL)
+            this->tail = newNode;
         
         this->count++;
-        
         return data;
+    }
+    
+    int sortedInsert(int data)
+    {
+        int position = 1;
+        Node *ptr = this->head;
+        Node *prevPtr = NULL;
+        
+        while (ptr && data > ptr->data && position <= this->count)
+        {
+            prevPtr = ptr;
+            ptr = ptr->next;
+            position++;
+        }
+        
+        return this->insert(data, position);
     }
     
     void print()
@@ -156,7 +167,7 @@ class LinkedList
             std::cout << ctr->data << " ";
             ctr = ctr->next;
         }
-        std::cout << std::endl;
+        std::cout << std::endl << std::endl;
     }
     
     ~LinkedList()
@@ -172,27 +183,27 @@ class LinkedList
 };
 
 int main() {
-    // Write C++ code here
-    LinkedList list;
-    list.push(1);
-    list.push(2);
-    list.print();
-    
-    std::cout << std::endl;
-    
-    int arr[] = {1, 2, 3, 4, 5};
-    LinkedList list2(arr, 5);
-    list2.print();
-    
-    std::cout << list2.pop() << std::endl;
-    std::cout << list2.pop() << std::endl;
-    std::cout << list2.pop() << std::endl;
-    std::cout << list2.pop() << std::endl;
-    std::cout << list2.pop() << std::endl;
-    list2.print();
+    LinkedList list2;
     
     list2.push(11);
-    list2.push(12);
+    list2.push(14);
+    list2.push(18);
+    list2.push(23);
+    
+    list2.print();
+
+    // list2.insert(15, 3);
+
+    list2.sortedInsert(21);
+    list2.print();
+    list2.sortedInsert(0);
+    list2.print();
+    list2.sortedInsert(100);
+    list2.print();
+    list2.sortedInsert(-20);
+    list2.print();
+    
+    list2.sortedInsert(221);
     list2.print();
     
     return 0;
