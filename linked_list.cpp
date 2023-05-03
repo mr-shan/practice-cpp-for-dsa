@@ -1,4 +1,3 @@
-// Online C++ compiler to run C++ program online
 #include <iostream>
 
 struct Node
@@ -29,6 +28,11 @@ class LinkedList
         this->count - 0;
         for(int i = 0; i < length; ++i)
             this->push(arr[i]);
+    }
+    
+    Node * getHead()
+    {
+        return this->head;
     }
     
     void push(int data)
@@ -170,6 +174,42 @@ class LinkedList
         std::cout << std::endl << std::endl;
     }
     
+    // reverse the linked list using changing the links
+    // this uses three pointers.
+    // these pointers are moved ahead by swapping links
+    void reverse()
+    {
+        Node *p = this->head, *q = NULL, *r = NULL;
+        
+        this->tail = p;
+        while (p != NULL)
+        {
+            r = q;
+            q = p;
+            p = p->next;
+            q->next = r;
+        }
+        this->head = q;
+    }
+    
+    // reverse the linked using recursion
+    // traverse the list until the end
+    // reverse links at returning time
+    // maintain two pointers for changing links
+    void recursiveReverse(Node *p, Node *q = NULL)
+    {
+        if (p)
+        {
+            this->recursiveReverse(p->next, p);
+            p->next = q;
+        }
+        else
+        {
+            this->head = q;
+        }
+        this->tail = p;
+    }
+    
     ~LinkedList()
     {
         Node *ctr = this->head;
@@ -204,6 +244,9 @@ int main() {
     list2.print();
     
     list2.sortedInsert(221);
+    list2.print();
+    
+    list2.recursiveReverse(list2.getHead());
     list2.print();
     
     return 0;
