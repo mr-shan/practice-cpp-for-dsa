@@ -210,16 +210,29 @@ class LinkedList
         this->tail = p;
     }
     
-    ~LinkedList()
+    
+    // append another linked list to this one.
+    void append(LinkedList list2)
     {
-        Node *ctr = this->head;
-        while (ctr != NULL)
-        {
-            Node *temp = ctr;
-            ctr = ctr->next;
-            free(temp);
-        }
+        Node *head2 = list2.getHead();
+        Node *tail2 = list2.getTail();
+        int count = list2.getCount();
+        
+        this->tail->next = head2;
+        this->tail = tail2;
+        this->count += count;
     }
+    
+//    ~LinkedList()
+//    {
+//        Node *ctr = this->head;
+//        while (ctr != NULL)
+//        {
+//            Node *temp = ctr;
+//            ctr = ctr->next;
+//            free(temp);
+//        }
+//    }
 };
 
 int main() {
