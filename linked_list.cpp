@@ -18,14 +18,14 @@ class LinkedList
     {
         this->head = NULL;
         this->tail = NULL;
-        this->count - 0;
+        this->count = 0;
     }
     
     LinkedList(int *arr, int length)
     {
         this->head = NULL;
         this->tail = NULL;
-        this->count - 0;
+        this->count = 0;
         for(int i = 0; i < length; ++i)
             this->push(arr[i]);
     }
@@ -33,6 +33,16 @@ class LinkedList
     Node * getHead()
     {
         return this->head;
+    }
+    
+    int getCount()
+    {
+        return this->count;
+    }
+    
+    Node *getTail()
+    {
+        return this->tail;
     }
     
     void push(int data)
@@ -46,8 +56,8 @@ class LinkedList
             this->head = n;
             this->tail = n;
             this->count = 1;
-        } 
-        else 
+        }
+        else
         {
             this->tail->next = n;
             this->tail = n;
@@ -210,7 +220,6 @@ class LinkedList
         this->tail = p;
     }
     
-    
     // append another linked list to this one.
     void append(LinkedList list2)
     {
@@ -221,6 +230,17 @@ class LinkedList
         this->tail->next = head2;
         this->tail = tail2;
         this->count += count;
+    }
+    
+    // merge two linked lists, sorted merge
+    void merge(LinkedList list1, LinkedList list2)
+    {
+        if (this->count != 0) return;
+        
+        Node *head1 = list1.getHead();
+        Node *head2 = list2.getHead();
+        
+        
     }
     
 //    ~LinkedList()
@@ -236,31 +256,17 @@ class LinkedList
 };
 
 int main() {
-    LinkedList list2;
+    int arr1[] = { 10, 2, 4 };
+    int arr2[] = { 9, 1, 16 };
+    LinkedList list1(arr1, 3);
+    LinkedList list2(arr2, 3);
     
-    list2.push(11);
-    list2.push(14);
-    list2.push(18);
-    list2.push(23);
-    
-    list2.print();
-
-    // list2.insert(15, 3);
-
-    list2.sortedInsert(21);
-    list2.print();
-    list2.sortedInsert(0);
-    list2.print();
-    list2.sortedInsert(100);
-    list2.print();
-    list2.sortedInsert(-20);
+    list1.print();
     list2.print();
     
-    list2.sortedInsert(221);
-    list2.print();
+    list1.append(list2);
     
-    list2.recursiveReverse(list2.getHead());
-    list2.print();
+    list1.print();
     
     return 0;
 }
